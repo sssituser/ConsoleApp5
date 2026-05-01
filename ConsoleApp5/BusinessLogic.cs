@@ -1,9 +1,12 @@
 ﻿
 using System.Data.SqlClient;
 using System.Data;
+using System.Runtime.InteropServices;
+using System.Collections.Generic;
 
 namespace ConsoleApp5
 {
+    // Business Logic is responsible for performing all the database related operations like insert, update, delete and select
     internal class BusinessLogic
     {
         SqlConnection connection;
@@ -27,7 +30,7 @@ namespace ConsoleApp5
         }
         public bool DeleteEmployee(Employee emp)
         {
-            command.CommandText = $"delete from tbl_employee where eid = {emp.EmpId})";
+            command.CommandText = $"delete from tbl_employee where eid = {emp.EmpId}";
             connection.Open();
             int res = command.ExecuteNonQuery();
             connection.Close();
@@ -42,6 +45,37 @@ namespace ConsoleApp5
             connection.Close();
             return res == 1;
 
+        }
+        public Employee FindEmployeeById(Employee emp)
+        {
+            command.CommandText = $"select * from tbl_employee where eid ={emp.EmpId}";
+            connection.Open();
+            dataReader = command.ExecuteReader();
+            while (dataReader.Read())
+            {
+                emp.EmpName =dataReader["ename"].ToString();
+                emp.EmpSal = int.Parse(dataReader["esal"].ToString());
+            }
+            connection.Close();
+            return emp;
+
+        }
+        public List<Employee> FindAll()
+        {
+            List<Employee> employees = new List<Employee>();
+            command.CommandText = "select * from tbl_employee";
+            connection.Open();
+            dataReader=command.ExecuteReader();
+            while (dataReader.Read())
+            {
+                Employee emp = new Employee();
+                emp.EmpId = dataReader.GetInt32(0);
+                emp.EmpName = dataReader.GetString(1);
+                emp.EmpSal = dataReader.GetInt32(2);
+                employees.Add(emp);
+            }
+            connection.Close();
+            return employees;
         }
 
     }

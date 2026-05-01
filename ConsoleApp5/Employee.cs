@@ -11,5 +11,10 @@ namespace ConsoleApp5
         public int EmpId { get; set; }
         public string EmpName { get; set; }
         public int EmpSal { get; set; }
+
+        public override string ToString()
+        {
+            return "Employee ID : " + EmpId + "\tEmployee Name : " + EmpName + "\tEmployee Salary : " + EmpSal;
+        }
     }
 }
