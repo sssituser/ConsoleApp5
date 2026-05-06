@@ -1,29 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace ConsoleApp5
 {
-    internal class Program
+    internal class Class1
     {
         static void Main(string[] args)
         {
 
             Employee emp = new Employee();
-           
+            SecurityAccessLayer sl = new SecurityAccessLayer();
 
-            BusinessLogic bl = new BusinessLogic();
-            
 
 
         Menu:
             Console.Write("1.Add\n2.Delete\n3.Edit\n4.Find\n5.FindAll\nEnter Your choice : ");
             int option = int.Parse(Console.ReadLine());
             Console.Clear();
-            switch (option) {
+            switch (option)
+            {
                 case 1:
                     Console.Write("Employee ID : ");
                     emp.EmpId = int.Parse(Console.ReadLine());
@@ -34,7 +33,7 @@ namespace ConsoleApp5
                     Console.Write("Employee Salary : ");
                     emp.EmpSal = int.Parse(Console.ReadLine());
 
-                    if (bl.AddEmployee(emp))
+                    if (sl.AddEmployee(emp))
                     {
                         Console.WriteLine("Record Inserted Successfully.....");
                     }
@@ -47,7 +46,7 @@ namespace ConsoleApp5
                 case 2:
                     Console.Write("Enter Employee ID  :");
                     emp.EmpId = int.Parse(Console.ReadLine());
-                    if(bl.DeleteEmployee(emp))
+                    if (sl.DeleteEmployee(emp))
                     {
                         Console.WriteLine("Record Deleted Successfully.....");
                     }
@@ -66,7 +65,7 @@ namespace ConsoleApp5
                     Console.Write("Employee Salary : ");
                     emp.EmpSal = int.Parse(Console.ReadLine());
 
-                    if (bl.UpdateEmployee(emp))
+                    if (sl.UpdateEmployee(emp))
                     {
                         Console.WriteLine("Record Updated Successfully.....");
                     }
@@ -79,27 +78,27 @@ namespace ConsoleApp5
                 case 4:
                     Console.Write("Enter Employee ID : ");
                     emp.EmpId = int.Parse(Console.ReadLine());
-                    if(bl.FindEmployeeById(emp) == null)
+                    if (sl.FindEmployeeById(emp) == null)
                     {
                         Console.WriteLine("Record Not Found");
                         goto Menu;
                     }
-                    emp =bl.FindEmployeeById(emp);
+                    emp = sl.FindEmployeeById(emp);
                     Console.WriteLine($"Employee Name :{emp.EmpName}");
                     Console.WriteLine($"Employee Salary :{emp.EmpSal}");
                     goto Menu;
                 case 5:
-                    if (bl.FindAll().Count > 0)
+                    if (sl.FindAll() != null)
                     {
-                        List<Employee> emplist = bl.FindAll();
-                        foreach(Employee empp in emplist)
+                        List<Employee> emplist = sl.FindAll();
+                        foreach (Employee empp in emplist)
                         {
                             Console.WriteLine(empp);
                         }
                     }
                     else
                     {
-                        Console.WriteLine("Records Not Available"   );
+                        Console.WriteLine("Records Not Available");
                     }
                     goto Menu;
                 default:
@@ -111,3 +110,5 @@ namespace ConsoleApp5
         }
     }
 }
+
+

@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using System.Collections.Generic;
 
 namespace ConsoleApp5
-{
+{    // Connected Architecture Business Logic
     // Business Logic is responsible for performing all the database related operations like insert, update, delete and select
     internal class BusinessLogic
     {
@@ -51,10 +51,15 @@ namespace ConsoleApp5
             command.CommandText = $"select * from tbl_employee where eid ={emp.EmpId}";
             connection.Open();
             dataReader = command.ExecuteReader();
-            while (dataReader.Read())
+            if (dataReader.Read())
             {
                 emp.EmpName =dataReader["ename"].ToString();
                 emp.EmpSal = int.Parse(dataReader["esal"].ToString());
+            }
+            else
+            {
+
+                emp = null;
             }
             connection.Close();
             return emp;
