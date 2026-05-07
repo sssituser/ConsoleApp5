@@ -1,3 +1,5 @@
 <Solution>
   <Project Path="ConsoleApp5/ConsoleApp5.csproj" Id="b2ff7c33-fa7a-4415-bebb-17980d4063b8" />
+  <Project Path="EnitityFrameworkConsoleExample/EnitityFrameworkConsoleExample.csproj" Id="f888329b-7361-4995-95ec-83910a3e7024" />
+  <Project Path="EntityFrameworkEmployeeConsoleApp/EntityFrameworkEmployeeConsoleApp.csproj" Id="568fba42-e1ae-4e72-8cc8-c50f1bba0fc2" />
 </Solution>
